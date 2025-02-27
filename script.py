@@ -29,7 +29,7 @@ def scrape_data_point():
 
     if req.ok:
         soup = bs4.BeautifulSoup(req.text, "html.parser")
-        most_read = soup.find("a", class_ = "frontpage-link standard-link")
+        most_read = soup.find("span", id = "mostRead").find("div", class_ = "col-sm-5 most-read-item").find("a", class_ = "frontpage-link standard-link")
         data_point = "" if most_read is None else most_read.text
         loguru.logger.info(f"Data point: {data_point}")
         return data_point
