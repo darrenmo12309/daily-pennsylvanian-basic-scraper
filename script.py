@@ -33,7 +33,8 @@ def scrape_data_point():
         last_row = sport_sec[-1]
         sports_header = last_row.find_all("div", class_ = "col-sm-6", recursive = False)
         sports_header_two = sports_header[-1]
-        data_point = "" if sports_header_two is None else sports_header_two.text
+        sports_header_final = sports_header_two.find("a", class_ = "frontpage-link medium-link font-regular")
+        data_point = "" if sports_header_final is None else sports_header_final.text
         loguru.logger.info(f"Data point: {data_point}")
         return data_point
 
