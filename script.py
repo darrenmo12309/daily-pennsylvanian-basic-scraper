@@ -29,10 +29,9 @@ def scrape_data_point():
 
     if req.ok:
         soup = bs4.BeautifulSoup(req.text, "html.parser")
-        rows = soup.find("body").find("div", class_ = "container homepage-container").find("div").find_all("div", class_ = "row", recursive = False)
-        last_row = rows[-1]
-        most_read_section = last_row.find("div", class_ = "row section-etc hidden-sm hidden-xs").find("span").find("div", class_ = "col-sm-5 most-read-item")
-        most_read = most_read_section.find("a", class_ = "frontpage-link standard-link")
+        rows = soup.find("span", id = "mostRead")
+        item = rows.find("div", class_ = "col-sm-5 most-read-item")
+        most_read = item.find("a", class_ = "frontpage-link standard-link")
         data_point = "" if most_read is None else most_read.text
         loguru.logger.info(f"Data point: {data_point}")
         return data_point
