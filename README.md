@@ -1,3 +1,7 @@
+# How I made modifications to the scraper
+
+I changed the scraper so it would get the #1 most read article in the Most Read section at the bottom of the page. In doing this, I had to make my navigation logic very precise, as there were more complexities in the path my scraper had to follow to get to the most popular article. First I had to make use of chained find() and find_all() functions, in order to go down the tree of HTML elements. In order to go the specific path of the tree I wanted, I made sure to specify which child element I wanted specifically. In the case that there was more than one child element, I use the find_all function and chose the one in the returned list I wanted. Finally, in the case I wanted to only get elements in the very level of the tree below the current element I was on, I had to use the recursive = false parameter so that I could actually know where the element I wanted was in my list (otherwise there would've been too many div elements with class = "row"). Then when I finally got to the msot read article, I simply did the same as before, I extracted the text.
+
 # Basic Git Scraper Template
 
 This template provides a starting point for **git scraping**—the technique of scraping data from websites and automatically committing it to a Git repository using workflows, [coined by Simon Willison](https://simonwillison.net/2020/Oct/9/git-scraping/).
